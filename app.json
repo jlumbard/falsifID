@@ -22,7 +22,11 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist":{
+        "NSCameraUsageDescription": "So you can take a picture of your face or ID",
+        "NSPhotoLibraryUsageDescription": "So you can upload a picture of your face or ID"
+      }
     }
   }
 }
