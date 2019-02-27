@@ -26,6 +26,8 @@ export default class ImageSelect extends React.Component {
     let result = await ImagePicker.launchImageLibraryAsync({
       allowsEditing: true,
       aspect: [3, 3],
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      base64: true,
     });
 
     console.log(result);

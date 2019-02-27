@@ -29,7 +29,7 @@ export default class App extends Component {
         <StatusBar
           barStyle="light-content"
           backgroundColor="#4F6D7A"
-        />>
+        />
         <ImageSelect style={styles.image}/>
         <View style="display:inline">
             <Button title="Calculate"></Button>
