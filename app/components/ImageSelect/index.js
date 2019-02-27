@@ -11,7 +11,7 @@ export default class ImageSelect extends React.Component {
     let { image } = this.state;
 
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#2e2e2e', borderRadius: 30 }}>
         <Button
           title="Pick an image from camera roll"
           onPress={this._pickImage}

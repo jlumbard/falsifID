@@ -8,6 +8,7 @@ import {
   StatusBar,
   Button
 } from 'react-native';
+import HeaderIcon from './components/HeaderIcon';
 import ImageSelect from './components/ImageSelect';
 import Expo from 'expo';
 
@@ -27,12 +28,13 @@ export default class App extends Component {
     return (
       <View style={styles.container}>
         <StatusBar barStyle="dark-content"/>
+        <HeaderIcon style={styles.logo}/>
+        <ImageSelect style={styles.image}/>
         <ImageSelect style={styles.image}/>
         <View style="display:inline">
             <Button title="Calculate"></Button>
             <Text>0% Match</Text>
         </View>
-        <ImageSelect style={styles.image} />
       </View>
     );
   }
@@ -40,6 +42,7 @@ export default class App extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    padding: 20,
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
@@ -58,5 +61,10 @@ const styles = StyleSheet.create({
   },
   image: {
     borderRadius: 100, //NotWorking
+    backgroundColor: '#2e2e2e',
+  },
+  logo: {
+    borderRadius: 20,
+    overflow: 'hidden',
   },
 });
