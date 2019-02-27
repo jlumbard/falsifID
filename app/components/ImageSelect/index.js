@@ -12,12 +12,12 @@ export default class ImageSelect extends React.Component {
 
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#2e2e2e', borderRadius: 30 }}>
-        <Button
-          title="Pick an image from camera roll"
+        <TouchableOpacity
           onPress={this._pickImage}
         />
         {image &&
           <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+        <Image source={require("./assets/camera.png")}/>
       </View>
     );
   }
