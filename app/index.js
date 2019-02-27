@@ -26,10 +26,7 @@ export default class App extends Component {
 
     return (
       <View style={styles.container}>
-        <StatusBar
-          barStyle="light-content"
-          backgroundColor="#4F6D7A"
-        />>
+        <StatusBar barStyle="dark-content"/>
         <ImageSelect style={styles.image}/>
         <View style="display:inline">
             <Button title="Calculate"></Button>
@@ -46,7 +43,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#4F6D7A',
+    backgroundColor: '#e1e4e4',
   },
   welcome: {
     fontSize: 20,
