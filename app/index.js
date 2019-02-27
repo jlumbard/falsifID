@@ -5,7 +5,8 @@ import {
   StyleSheet,
   Text,
   View,
-  StatusBar
+  StatusBar,
+  Button
 } from 'react-native';
 import ImageSelect from './components/ImageSelect';
 import Expo from 'expo';
@@ -28,12 +29,13 @@ export default class App extends Component {
         <StatusBar
           barStyle="light-content"
           backgroundColor="#4F6D7A"
-        />
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <ImageSelect/>
-        <ImageSelect/>
+        />>
+        <ImageSelect style={styles.image}/>
+        <View style="display:inline">
+            <Button title="Calculate"></Button>
+            <Text>0% Match</Text>
+        </View>
+        <ImageSelect style={styles.image} />
       </View>
     );
   }
@@ -56,5 +58,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#F5FCFF',
     marginBottom: 5,
+  },
+  image: {
+    borderRadius: 100, //NotWorking
   },
 });
