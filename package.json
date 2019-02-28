@@ -9,8 +9,13 @@
     "eject": "expo eject"
   },
   "dependencies": {
-    "expo": "^31.0.2",
-    "prop-types": "^15.6.2",
+    "@tensorflow/tfjs-node": "^0.3.1",
+    "canvas": "^2.3.1",
+    "expo": "^31.0.6",
+    "face-api.js": "^0.18.0",
+    "fs": "0.0.1-security",
+    "node-gyp": "^3.8.0",
+    "prop-types": "^15.7.2",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz",
     "react-native-extended-stylesheet": "^0.11.1",
