@@ -84,7 +84,7 @@ export default class App extends Component {
             style={styles.touch}
             onPress={() => this.imageAdd("ID")}
           >
-            {this.state.image &&
+            {this.state.IDimage &&
               <Image source={{ uri: this.state.IDimage }} style={{ width: 200, height: 200 }} />}
             <Image source={require("../assets/camera.png")} style={styles.camera}/>
           </TouchableOpacity>
