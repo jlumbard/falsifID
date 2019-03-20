@@ -10,14 +10,9 @@ import {
   Image
 } from 'react-native';
 import HeaderIcon from './components/HeaderIcon';
-import { ImagePicker } from 'expo';
+import { Permissions, ImagePicker } from 'expo';
 import Expo from 'expo';
 
-const options={
-  title: 'my pic app',
-  takePhotoButtonTitle: 'Take photo with your camera',
-  chooseFromLibraryButtonTitle: 'Choose photo from library',
-}
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
@@ -35,25 +30,29 @@ export default class App extends Component {
     IDimageData:null,
   };
 
-  imageAdd = async (caller) =>{
-    let result = await ImagePicker.launchImageLibraryAsync({
-      //Below are preferences for the image picking
-      allowsEditing: true,
-      aspect: [3, 3],
-      mediaTypes: Expo.ImagePicker.MediaTypeOptions.Images,
-      base64: true,
-    });
 
-    console.log(result);
 
-    if (!result.cancelled) {
-      console.log(caller);
-      if(caller =="ID"){
-        this.setState({ IDimage: result.uri, IDimageData: result.base64 });
-      }
-      else if( caller == "notID"){
-      this.setState({ image: result.uri, imageData: result.base64 });
-      }
+  imageAdd = async (caller) => {
+    const options = {
+        allowsEditing: true,
+        aspect: [3, 3],
+        mediaTypes: Expo.ImagePicker.MediaTypeOptions.Images,
+        base64: true,
+
+    }
+
+    const permissions = Permissions.CAMERA;
+    const { status } = await Permissions.askAsync(permissions);
+
+    let result = await ImagePicker.launchCameraAsync(options);
+
+    if (result.uri){
+        if (caller == "ID") {
+            this.setState({ IDimage: result.uri, IDimageData: result.base64 });
+        }
+        else if (caller == "notID") {
+            this.setState({ image: result.uri, IDimageData: result.base64 });
+        }
     }
   }
 
