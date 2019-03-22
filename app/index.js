@@ -29,9 +29,12 @@ constructor() {
     // Assign state itself, and a default value for items
     this.state = {
       image: null,
+      imgurImage: null,
       imageData:null,
       IDimage: null,
-      IDimageData:null,
+      imgurIDimage: null,
+      IDimageData:null
+
     };
   }
 
@@ -41,25 +44,64 @@ constructor() {
       console.log(this.IDImage);
       console.log(this.image);
 
-
-      fetch("https://api.deepai.org/api/image-similarity",{
+      fetch("https://api.imgur.com/3/upload",{
         method: "POST",
         headers: new Headers({
-          'api-key': '81e2316b-b15f-4a07-89ea-11fa26b4b1a5',
-          'Content-Type': 'application/x-www-form-urlencoded'
+          'Authorization': 'Client-ID e9dc7944b2c03e4'
         }),
 
-        body: "image1=" + this.IDImage +
-        "&image2=" + this.image
+        body: "image=" + this.IDImage
       })
       .then(response => response.json())
       .then(response => {
         console.log("Success");
         console.log(response);
+        this.imgurIDImage = response.link;
+
+        fetch("https://api.imgur.com/3/upload",{
+          method: "POST",
+          headers: new Headers({
+            'Authorization': 'Client-ID e9dc7944b2c03e4'
+          }),
+
+          body: "image=" + this.image
+        })
+        .then(response => response.json())
+        .then(response => {
+          console.log("Success");
+          console.log(response);
+          this.imgurImage = response.link;
+
+        fetch("https://api.deepai.org/api/image-similarity",{
+            method: "POST",
+            headers: new Headers({
+              'api-key': '81e2316b-b15f-4a07-89ea-11fa26b4b1a5',
+              'Content-Type': 'application/x-www-form-urlencoded'
+            }),
+
+            body: "image1=" + this.imgurImage +
+            "&image2=" + this.imgurIDImage
+          })
+          .then(response => response.json())
+          .then(response => {
+            console.log("Success");
+            console.log(response);
+          })
+          .catch(error => {
+            console.log("upload error", error);
+        });
+
+        })
+        .catch(error => {
+          console.log("upload error", error);
+        });
+
       })
       .catch(error => {
         console.log("upload error", error);
       });
+
+
     };
 
 
@@ -81,11 +123,11 @@ constructor() {
     if (result.uri){
         if (caller == "ID") {
             this.setState({ IDimage: result.uri, IDimageData: result.base64 });
-            this.IDImage = result.uri;
+            this.IDImage = result.base64;
         }
         else if (caller == "notID") {
             this.setState({ image: result.uri, IDimageData: result.base64 });
-            this.image = result.uri;
+            this.image = result.base64;
         }
     }
   }
