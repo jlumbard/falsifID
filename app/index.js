@@ -23,12 +23,44 @@ const instructions = Platform.select({
 
 export default class App extends Component {
 
-  state = {
-    image: null,
-    imageData:null,
-    IDimage: null,
-    IDimageData:null,
-  };
+constructor() {
+    super();
+
+    // Assign state itself, and a default value for items
+    this.state = {
+      image: null,
+      imageData:null,
+      IDimage: null,
+      IDimageData:null,
+    };
+  }
+
+  uploadImage = () => {
+      console.log("works");
+      const data = new FormData();
+      console.log(this.IDImage);
+      console.log(this.image);
+
+
+      fetch("https://api.deepai.org/api/image-similarity",{
+        method: "POST",
+        headers: new Headers({
+          'api-key': '81e2316b-b15f-4a07-89ea-11fa26b4b1a5',
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }),
+
+        body: "image1=" + this.IDImage +
+        "&image2=" + this.image
+      })
+      .then(response => response.json())
+      .then(response => {
+        console.log("Success");
+        console.log(response);
+      })
+      .catch(error => {
+        console.log("upload error", error);
+      });
+    };
 
 
 
@@ -49,9 +81,11 @@ export default class App extends Component {
     if (result.uri){
         if (caller == "ID") {
             this.setState({ IDimage: result.uri, IDimageData: result.base64 });
+            this.IDImage = result.uri;
         }
         else if (caller == "notID") {
             this.setState({ image: result.uri, IDimageData: result.base64 });
+            this.image = result.uri;
         }
     }
   }
@@ -90,7 +124,7 @@ export default class App extends Component {
         </View>
 
         <View style="display:inline">
-            <Button title="Calculate"></Button>
+            <Button onPress={() => this.uploadImage()} title="Calculate"></Button>
             <Text>0% Match</Text>
         </View>
       </View>
